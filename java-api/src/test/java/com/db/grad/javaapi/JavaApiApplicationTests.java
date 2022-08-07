@@ -8,6 +8,7 @@ class JavaApiApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// unit tests 
 	}
 
 }
