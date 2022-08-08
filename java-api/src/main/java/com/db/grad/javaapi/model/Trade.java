@@ -13,6 +13,7 @@ public class Trade {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="TradeId")
 	int TradeId; 
 	private int BookId;
 	private int SecurityId;
@@ -27,22 +28,27 @@ public class Trade {
 	private Date SettlementDate;
 	
 	@ManyToOne
-    @JoinColumn(name="BookId", nullable=false)
-    private Book book;
+    @JoinColumn(name="BookId")
+    private Book books;
 
 	
 	@ManyToOne
-    @JoinColumn(name="SecurityId", nullable=false)
-    private Security security;
+    @JoinColumn(name="SecurityId")
+    private Security securities;
 	
 	@ManyToOne
-    @JoinColumn(name="CounterpartyId", nullable=false)
-    private Counterparty Counterparty;
+	@JoinColumn(name="CounterpartyId")
+    private Counterparty Counterparties;
+	
+	public Trade() {
+		
+	}
 
-	public Trade(int bookId, int securityId, int counterpartyId, int quantity, int price, int tradeStatus, int buy_Sell,
-			Date tradeDate, Date settlementDate, Book book, Security security,
-			com.db.grad.javaapi.model.Counterparty counterparty) {
+	public Trade(int tradeId, int bookId, int securityId, int counterpartyId, int quantity, int price, int tradeStatus,
+			int buy_Sell, Date tradeDate, Date settlementDate, Book books, Security securities,
+			Counterparty counterparties) {
 		super();
+		TradeId = tradeId;
 		BookId = bookId;
 		SecurityId = securityId;
 		CounterpartyId = counterpartyId;
@@ -52,9 +58,9 @@ public class Trade {
 		Buy_Sell = buy_Sell;
 		TradeDate = tradeDate;
 		SettlementDate = settlementDate;
-		this.book = book;
-		this.security = security;
-		Counterparty = counterparty;
+		this.books = books;
+		this.securities = securities;
+		Counterparties = counterparties;
 	}
 
 	public int getTradeId() {
@@ -137,28 +143,28 @@ public class Trade {
 		SettlementDate = settlementDate;
 	}
 
-	public Book getBook() {
-		return book;
+	public Book getBooks() {
+		return books;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setBooks(Book books) {
+		this.books = books;
 	}
 
-	public Security getSecurity() {
-		return security;
+	public Security getSecurities() {
+		return securities;
 	}
 
-	public void setSecurity(Security security) {
-		this.security = security;
+	public void setSecurities(Security securities) {
+		this.securities = securities;
 	}
 
-	public Counterparty getCounterparty() {
-		return Counterparty;
+	public Counterparty getCounterparties() {
+		return Counterparties;
 	}
 
-	public void setCounterparty(Counterparty counterparty) {
-		Counterparty = counterparty;
+	public void setCounterparties(Counterparty counterparties) {
+		Counterparties = counterparties;
 	}
 
 	@Override
@@ -166,9 +172,10 @@ public class Trade {
 		return "Trade [TradeId=" + TradeId + ", BookId=" + BookId + ", SecurityId=" + SecurityId + ", CounterpartyId="
 				+ CounterpartyId + ", Quantity=" + Quantity + ", Price=" + Price + ", TradeStatus=" + TradeStatus
 				+ ", Buy_Sell=" + Buy_Sell + ", TradeDate=" + TradeDate + ", SettlementDate=" + SettlementDate
-				+ ", book=" + book + ", security=" + security + ", Counterparty=" + Counterparty + "]";
+				+ ", books=" + books + ", securities=" + securities + ", Counterparties=" + Counterparties + "]";
 	}
 
+	
 	
 	
 	

@@ -5,20 +5,21 @@ import java.util.*;
 import javax.persistence.*;
 
 @Entity
-	@Table(name = "users")
-	public class User {
+@Table(name = "users")
+public class User {
 		
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		int UserId;
 		private String Name;
 		private String Email;
-		private String Role;
 		private String Password;
+		private String Role;
+		
 		
 		@ManyToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
 		@JoinTable(
-				name="BookUser",
+				name="bookuser",
 				joinColumns= @JoinColumn(name ="UserId", referencedColumnName="UserId"),
 				inverseJoinColumns= @JoinColumn( name="BookId", referencedColumnName="BookId")
 				

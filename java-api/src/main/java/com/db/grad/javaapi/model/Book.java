@@ -14,7 +14,7 @@ public class Book {
 	int BookId; 
 	private String BookName;
 	
-	@OneToMany(mappedBy="book")
+	@OneToMany(mappedBy="books")
 	private Collection<Trade> trades;
 
 	public Book(String bookName, Collection<Trade> trades) {

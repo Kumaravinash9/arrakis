@@ -17,16 +17,21 @@ public class Counterparty {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="CounterpartyId")
 	int CounterpartyId;
 	private String CounterpartyName;
 	
 	
-	@OneToMany(mappedBy="counterparty")
+	@OneToMany(mappedBy="Counterparties")
 	private Collection<Trade> trades;
 
+	public Counterparty() {
+		
+	}
 
-	public Counterparty(String counterpartyName, Collection<Trade> trades) {
+	public Counterparty(int counterpartyId, String counterpartyName, Collection<Trade> trades) {
 		super();
+		CounterpartyId = counterpartyId;
 		CounterpartyName = counterpartyName;
 		this.trades = trades;
 	}
@@ -69,6 +74,7 @@ public class Counterparty {
 	}
 
 
+	
 	
 	
 }

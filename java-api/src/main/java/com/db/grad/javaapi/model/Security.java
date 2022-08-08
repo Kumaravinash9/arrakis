@@ -22,7 +22,7 @@ public class Security {
 	private int FaceValue;
 	private int SecurityStatus;
 	
-	@OneToMany(mappedBy="security")
+	@OneToMany(mappedBy="securities")
 	private Collection<Trade> trades;
 
 	public Security(String iSIN, String cUSIP, String issuerName, String securityType, Date maturityDate, int coupon,
