@@ -23,6 +23,8 @@ import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 
 import Books from "views/pages/Books.js";
+import Securities from "views/pages/Securities.js"
+import Trades from "views/pages/Trades.js"
 
 var routes = [
   {
@@ -30,6 +32,20 @@ var routes = [
     name: "Dashboard",
     icon: "ni ni-bullet-list-67 text-blue",
     component: Books,
+    layout: "/admin",
+  },
+  {
+    path: "/security",
+    name: "Securities",
+    icon: "ni ni-bullet-list-67 text-blue",
+    component: Securities,
+    layout: "/admin",
+  },
+  {
+    path: "/trade",
+    name: "Trades",
+    icon: "ni ni-bullet-list-67 text-blue",
+    component: Trades,
     layout: "/admin",
   },
   {
