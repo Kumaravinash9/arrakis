@@ -28,16 +28,16 @@ public class Trade {
 	private Date SettlementDate;
 	
 	@ManyToOne
-    @JoinColumn(name="BookId")
+    @JoinColumn(name="BookId",insertable=false,updatable=false)
     private Book books;
 
 	
 	@ManyToOne
-    @JoinColumn(name="SecurityId")
+    @JoinColumn(name="SecurityId",insertable=false,updatable=false)
     private Security securities;
 	
 	@ManyToOne
-	@JoinColumn(name="CounterpartyId")
+	@JoinColumn(name="CounterpartyId",insertable=false,updatable=false)
     private Counterparty Counterparties;
 	
 	public Trade() {

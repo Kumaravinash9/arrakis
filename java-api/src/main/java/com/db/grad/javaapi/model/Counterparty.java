@@ -17,7 +17,7 @@ public class Counterparty {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="CounterpartyId")
+	@Column(name="CounterpartyId",insertable = false, updatable = false)
 	int CounterpartyId;
 	private String CounterpartyName;
 	
