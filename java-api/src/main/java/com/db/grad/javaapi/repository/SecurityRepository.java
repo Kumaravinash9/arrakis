@@ -1,6 +1,7 @@
 package com.db.grad.javaapi.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +18,7 @@ public interface SecurityRepository extends JpaRepository<Security,Integer>{
 			+ "FROM securities s inner join trade t "
 			+ "ON s.securityid=t.securityid")
 	public List<SecurityTrade> getTradesOfSecurities();
+
+	public Optional<Security> findBySecurityandUser(Integer UserId, Integer SecurityId);
+
 }
