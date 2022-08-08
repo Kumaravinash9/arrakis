@@ -1,15 +1,8 @@
 import {
   Badge,
+  Button,
   Card,
   CardHeader,
-  CardBody,
-  Form,
-  FormGroup,
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Modal,
-  InputGroupText,
   CardFooter,
   DropdownMenu,
   DropdownItem,
@@ -24,14 +17,23 @@ import {
   Container,
   Row,
   UncontrolledTooltip,
-  Button,
+  Modal,
+  CardBody,
+  Form,
+  FormGroup,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
 } from "reactstrap";
-import ReactDatetime from "react-datetime";
 // core components
 import Header from "components/Headers/Header.js";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
+import ReactDatetime from "react-datetime";
 
-const Securities = () => {
+const BookDetail = () => {
+  const { book_id } = useParams();
   const [formModalIsOpen, setFormModalIsOpen] = useState(false);
   return (
     <>
@@ -45,7 +47,9 @@ const Securities = () => {
               <CardHeader className="bg-transparent border-0">
                 <Row className="align-items-center">
                   <div className="col">
-                    <h3 className="text-white mb-0">Securities</h3>
+                    <h3 className="text-white mb-0">
+                      Trades in Book {book_id}
+                    </h3>
                   </div>
                   <div className="col text-right">
                     <Button
@@ -55,7 +59,7 @@ const Securities = () => {
                       onClick={() => setFormModalIsOpen(true)}
                       size="sm"
                     >
-                      Add Security
+                      Add Trade
                     </Button>
                     <Modal
                       className="modal-dialog-centered"
@@ -67,27 +71,20 @@ const Securities = () => {
                         <Card className="bg-secondary shadow border-0">
                           <CardBody className="px-lg-5 py-lg-5">
                             <div className="text-center text-muted mb-4">
-                              Enter Security Details
+                              Enter Trade Details
                             </div>
                             <Form role="form">
                               <FormGroup className="mb-3">
                                 <InputGroup className="input-group-alternative">
                                   <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                      <i className="ni ni-folder-17" />
+                                      <i className="ni ni-badge" />
                                     </InputGroupText>
                                   </InputGroupAddon>
-                                  <Input placeholder="ISIN" type="text" />
-                                </InputGroup>
-                              </FormGroup>
-                              <FormGroup className="mb-3">
-                                <InputGroup className="input-group-alternative">
-                                  <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                      <i className="ni ni-folder-17" />
-                                    </InputGroupText>
-                                  </InputGroupAddon>
-                                  <Input placeholder="CUSIP" type="text" />
+                                  <Input
+                                    placeholder="Counterparty ID"
+                                    type="number"
+                                  />
                                 </InputGroup>
                               </FormGroup>
                               <FormGroup className="mb-3">
@@ -97,21 +94,9 @@ const Securities = () => {
                                       <i className="ni ni-badge" />
                                     </InputGroupText>
                                   </InputGroupAddon>
-                                  <Input placeholder="Issuer" type="text" />
-                                </InputGroup>
-                              </FormGroup>
-                              <FormGroup className="mb-3">
-                                <InputGroup className="input-group-alternative">
-                                  <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                      <i className="ni ni-calendar-grid-58" />
-                                    </InputGroupText>
-                                  </InputGroupAddon>
-                                  <ReactDatetime
-                                    inputProps={{
-                                      placeholder: "Maturity Date",
-                                    }}
-                                    timeFormat={false}
+                                  <Input
+                                    placeholder="Security ID"
+                                    type="number"
                                   />
                                 </InputGroup>
                               </FormGroup>
@@ -119,28 +104,10 @@ const Securities = () => {
                                 <InputGroup className="input-group-alternative">
                                   <InputGroupAddon addonType="prepend">
                                     <InputGroupText>
-                                      <i className="ni ni-money-coins" />
+                                      <i className="ni ni-cart" />
                                     </InputGroupText>
                                   </InputGroupAddon>
-                                  <Input placeholder="Coupon" type="number" />
-                                </InputGroup>
-                              </FormGroup>
-                              <FormGroup className="mb-3">
-                                <InputGroup className="input-group-alternative">
-                                  <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                      <i className="ni ni-tag" />
-                                    </InputGroupText>
-                                  </InputGroupAddon>
-                                  <Input type="select">
-                                    <option disabled>
-                                      Select Type
-                                    </option>
-                                    <option>Government</option>
-                                    <option>Corporate</option>
-                                    <option>Agency</option>
-                                    <option>Municipal</option>
-                                  </Input>
+                                  <Input placeholder="Quantity" type="number" />
                                 </InputGroup>
                               </FormGroup>
                               <FormGroup className="mb-3">
@@ -150,9 +117,44 @@ const Securities = () => {
                                       <i className="ni ni-money-coins" />
                                     </InputGroupText>
                                   </InputGroupAddon>
-                                  <Input placeholder="Face Value" type="number" />
+                                  <Input placeholder="Price" type="number" />
                                 </InputGroup>
                               </FormGroup>
+                              <Row className="align-items-center">
+                                <div className="col">
+                                  <div className="custom-control custom-radio mb-3">
+                                    <input
+                                      className="custom-control-input"
+                                      id="buy_radio"
+                                      name="buy_sell_radio"
+                                      type="radio"
+                                      defaultChecked
+                                    />
+                                    <label
+                                      className="custom-control-label"
+                                      htmlFor="buy_radio"
+                                    >
+                                      Buy
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="col">
+                                  <div className="custom-control custom-radio mb-3">
+                                    <input
+                                      className="custom-control-input"
+                                      id="sell_radio"
+                                      name="buy_sell_radio"
+                                      type="radio"
+                                    />
+                                    <label
+                                      className="custom-control-label"
+                                      htmlFor="sell_radio"
+                                    >
+                                      Sell
+                                    </label>
+                                  </div>
+                                </div>
+                              </Row>
                               <div className="text-center">
                                 <Button
                                   className="my-4"
@@ -177,14 +179,14 @@ const Securities = () => {
                 <thead className="thead-dark">
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">ISIN</th>
-                    <th scope="col">CUSIP</th>
-                    <th scope="col">Issuer</th>
-                    <th scope="col">Maturity Date</th>
-                    <th scope="col">Coupon</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Face Value</th>
+                    <th scope="col">Counterparty ID</th>
+                    <th scope="col">Security ID</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Buy/Sell</th>
+                    <th scope="col">Trade Date</th>
+                    <th scope="col">Settlement Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -193,19 +195,19 @@ const Securities = () => {
                     onClick={() => console.log("Clicked")}
                   >
                     <td>1</td>
-                    <td>IN0000000000</td>
-                    <td>000000000</td>
-                    <td>XYZ</td>
-                    <td>01-01-2000</td>
                     <td>1</td>
-                    <td>Bond_Type</td>
-                    <td>$1000</td>
+                    <td>1</td>
+                    <td>1</td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-danger" />
-                        Not Cleared
+                        <i className="bg-success" />
+                        Valid
                       </Badge>
                     </td>
+                    <td>$1000</td>
+                    <td>Buy</td>
+                    <td>01-01-2000</td>
+                    <td>01-01-2000</td>
                   </tr>
                 </tbody>
               </Table>
@@ -217,4 +219,4 @@ const Securities = () => {
   );
 };
 
-export default Securities;
+export default BookDetail;

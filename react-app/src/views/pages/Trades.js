@@ -20,7 +20,7 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 
-const Books = () => {
+const Trades = () => {
   return (
     <>
       <Header />
@@ -42,7 +42,7 @@ const Books = () => {
                     <th scope="col">ID</th>
                     <th scope="col">Book ID</th>
                     <th scope="col">Counterparty ID</th>
-                    <th scope="col">Security Name</th>
+                    <th scope="col">Security ID</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Status</th>
                     <th scope="col">Price</th>
@@ -82,4 +82,4 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default Trades;
