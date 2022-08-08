@@ -9,6 +9,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 import BookDetail from "views/pages/BookDetail.js"
 
 import routes from "routes.js";
+import Profile from "views/pages/Profile";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -45,6 +46,9 @@ const Admin = (props) => {
         return routes[i].name;
       }
     }
+    if(props.location.pathname.indexOf("user-profile") !== -1) {
+      return "User Profile";
+    }
     return "Brand";
   };
 
@@ -67,6 +71,7 @@ const Admin = (props) => {
         <Switch>
           {getRoutes(routes)}
           <Route path="/admin/book/:book_id" component={BookDetail}/>
+          <Route path="/admin/user-profile" component={Profile}/>
           <Redirect from="*" to="/admin/index" />
         </Switch>
       </div>
