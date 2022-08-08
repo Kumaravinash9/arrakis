@@ -11,23 +11,30 @@ public class Book {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int BookId; 
+	Integer BookId; 
 	private String BookName;
 	
 	@OneToMany(mappedBy="books")
 	private Collection<Trade> trades;
+	public Book() {
+		
+	}
 
+	public Book(Integer BookId, String BookName) {
+		this.BookId = BookId;
+		this.BookName = BookName;
+	}
 	public Book(String bookName, Collection<Trade> trades) {
 		super();
 		BookName = bookName;
 		this.trades = trades;
 	}
 
-	public int getBookId() {
+	public Integer getBookId() {
 		return BookId;
 	}
 
-	public void setBookId(int bookId) {
+	public void setBookId(Integer bookId) {
 		BookId = bookId;
 	}
 

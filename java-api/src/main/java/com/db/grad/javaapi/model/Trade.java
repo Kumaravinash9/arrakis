@@ -44,11 +44,10 @@ public class Trade {
 		
 	}
 
-	public Trade(int tradeId, int bookId, int securityId, int counterpartyId, int quantity, int price, int tradeStatus,
-			int buy_Sell, Date tradeDate, Date settlementDate, Book books, Security securities,
-			Counterparty counterparties) {
+	public Trade(int bookId, int securityId, int counterpartyId, int quantity, int price, int tradeStatus,
+			int buy_Sell, Date tradeDate, Date settlementDate) {
 		super();
-		TradeId = tradeId;
+		//TradeId = tradeId;
 		BookId = bookId;
 		SecurityId = securityId;
 		CounterpartyId = counterpartyId;
@@ -58,9 +57,9 @@ public class Trade {
 		Buy_Sell = buy_Sell;
 		TradeDate = tradeDate;
 		SettlementDate = settlementDate;
-		this.books = books;
-		this.securities = securities;
-		Counterparties = counterparties;
+//		this.books = books;
+//		this.securities = securities;
+//		Counterparties = counterparties;
 	}
 
 	public int getTradeId() {

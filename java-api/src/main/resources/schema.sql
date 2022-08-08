@@ -20,6 +20,7 @@ BookId INT PRIMARY KEY AUTO_INCREMENT,
 BookName VARCHAR(70) NOT NULL
 );
 create table bookuser(
+pid INT PRIMARY KEY AUTO_INCREMENT,
 BookId INT,
 UserId INT,
 FOREIGN KEY (BookId) REFERENCES book(BookId),
