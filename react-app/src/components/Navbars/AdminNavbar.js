@@ -80,7 +80,7 @@ const AdminNavbar = (props) => {
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i className="ni ni-user-run" />
+                  <i className="ni ni-button-power" />
                   <span>Logout</span>
                 </DropdownItem>
               </DropdownMenu>

@@ -25,6 +25,7 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 
 import routes from "routes.js";
+import Login from "views/examples/Login";
 
 const Auth = (props) => {
   const mainContent = React.useRef(null);
@@ -97,6 +98,7 @@ const Auth = (props) => {
           <Row className="justify-content-center">
             <Switch>
               {getRoutes(routes)}
+              <Route path="/auth/login" component={Login}/>
               <Redirect from="*" to="/auth/login" />
             </Switch>
           </Row>
