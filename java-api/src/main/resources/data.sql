@@ -1,8 +1,8 @@
-insert into users values (1, 'Juliana Murchison', 'juliana.murchison@db.com', '12345678', 'Supervisor');
-insert into users values (2, 'Jill Moochler', 'jill.moochler@db.com', '12345678', 'Coodinator');
-insert into users values (3, 'Robert Gardner', 'robert.gardner@db.com', '12345678', 'Supervisor');
-insert into users values (4, 'Howard Bloxom', 'howard.bloxom@db.com', '12345678', 'Analyst');
-insert into users values (5, 'Keith Thomas', 'keith.thomas@db.com', '12345678', 'Analyst');
+insert into users values (1, 'Juliana Murchison', 'juliana.murchison@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Supervisor');
+insert into users values (2, 'Jill Moochler', 'jill.moochler@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Coodinator');
+insert into users values (3, 'Robert Gardner', 'robert.gardner@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Supervisor');
+insert into users values (4, 'Howard Bloxom', 'howard.bloxom@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Analyst');
+insert into users values (5, 'Keith Thomas', 'keith.thomas@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Analyst');
 
 insert into book values (1, 'book_1');
 insert into book values (2, 'book_2');
@@ -173,5 +173,3 @@ insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,B
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values (19, 2, 10, 1, 1, 4704, 0, '2022-08-2', '2022-08-4');
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values (19, 1, 7, 3, 1, 3860, 1, '2022-08-1', '2022-08-3');
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values (5, 1, 10, 1, 1, 4391, 0, '2022-08-8', '2022-08-10');
-
-

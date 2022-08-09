@@ -83,6 +83,15 @@ public class User {
 			this.books = books;
 		}
 
+		public User(String name, String email, String role, String password) {
+			super();
+			Name = name;
+			Email = email;
+			Role = role;
+			Password = password;
+			
+		}
+		
 		@Override
 		public String toString() {
 			return "User [UserId=" + UserId + ", Name=" + Name + ", Email=" + Email + ", Role=" + Role + ", Password="
