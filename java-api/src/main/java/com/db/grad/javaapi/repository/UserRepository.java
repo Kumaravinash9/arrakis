@@ -12,8 +12,9 @@ import com.db.grad.javaapi.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	
-	@Query("SELECT new com.db.grad.javaapi.model.User(u.Name, u.Email,  u.Role, u.Password) FROM User u WHERE u.Email = :email") 
+	@Query("SELECT new com.db.grad.javaapi.model.User(u.UserId, u.Name, u.Email,  u.Role, u.Password) FROM User u WHERE u.Email = :email") 
 	public User findByEmail(@Param("email") String email);
+	
 	 
 	
 	/* public Users findByEmailAndRole(String email, String role); */

@@ -1,8 +1,8 @@
-insert into users values (1, 'Juliana Murchison', 'juliana.murchison@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Supervisor');
-insert into users values (2, 'Jill Moochler', 'jill.moochler@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Coodinator');
-insert into users values (3, 'Robert Gardner', 'robert.gardner@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Supervisor');
-insert into users values (4, 'Howard Bloxom', 'howard.bloxom@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Analyst');
-insert into users values (5, 'Keith Thomas', 'keith.thomas@db.com', '$2a$10$3y.zslXMu6kHAefeN59aTOVWth2fOUmLQEqdTUc0pkslJ2CGukViK', 'Analyst');
+insert into users values (1, 'Juliana Murchison', 'juliana.murchison@db.com', '123456', 'Supervisor');
+insert into users values (2, 'Jill Moochler', 'jill.moochler@db.com', '123456', 'Coodinator');
+insert into users values (3, 'Robert Gardner', 'robert.gardner@db.com', '123456', 'Supervisor');
+insert into users values (4, 'Howard Bloxom', 'howard.bloxom@db.com', '123456', 'Analyst');
+insert into users values (5, 'Keith Thomas', 'keith.thomas@db.com', '123456', 'Analyst');
 
 insert into book values (1, 'book_1');
 insert into book values (2, 'book_2');

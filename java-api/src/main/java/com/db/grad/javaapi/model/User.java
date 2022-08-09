@@ -25,6 +25,9 @@ public class User {
 				
 				)
 		private Collection<Book> books;
+		public User() {
+			
+		}
 
 		public int getUserId() {
 			return UserId;
@@ -92,6 +95,16 @@ public class User {
 			
 		}
 		
+		
+		public User(int userId, String name, String email, String role,String password) {
+			super();
+			UserId = userId;
+			Name = name;
+			Email = email;
+			Password = password;
+			Role = role;
+		}
+
 		@Override
 		public String toString() {
 			return "User [UserId=" + UserId + ", Name=" + Name + ", Email=" + Email + ", Role=" + Role + ", Password="
