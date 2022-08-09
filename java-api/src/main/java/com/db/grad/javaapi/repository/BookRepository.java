@@ -11,10 +11,10 @@ import com.db.grad.javaapi.repository.BookProjection;
 
 public interface BookRepository extends JpaRepository<Book, Integer>{
 
-	@Query("select new com.db.grad.javaapi.repository.BookProjection (b.BookId, b.BookName) from Book b inner join BookUser t on b.BookId = t.BookId where t.UserId= :UserId")
+	@Query("select new com.db.grad.javaapi.repository.BookProjection (t.UserId,b.BookId, b.BookName) from Book b inner join BookUser t on b.BookId = t.BookId where t.UserId= :UserId")
 	List<BookProjection> findAllBooksByUser(@Param("UserId") Integer UserId);
 
-	@Query("select new com.db.grad.javaapi.repository.BookProjection (b.BookId, b.BookName) from Book b inner join BookUser t on b.BookId = t.BookId where t.BookId= :bookId and t.UserId= :userId")
+	@Query("select new com.db.grad.javaapi.repository.BookProjection (t.UserId,b.BookId, b.BookName) from Book b inner join BookUser t on b.BookId = t.BookId where t.BookId= :bookId and t.UserId= :userId")
 	BookProjection findBookById(@Param("bookId") Integer bookId, @Param("userId") Integer userId);
 
 }

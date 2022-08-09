@@ -25,8 +25,24 @@ public class Security {
 	@OneToMany(mappedBy="securities")
 	private Collection<Trade> trades;
 
+	
+	public Security(int securityId, String iSIN, String cUSIP, String issuerName, String securityType,
+			Date maturityDate, int coupon, int faceValue, int securityStatus) {
+		super();
+		SecurityId = securityId;
+		ISIN = iSIN;
+		CUSIP = cUSIP;
+		IssuerName = issuerName;
+		SecurityType = securityType;
+		MaturityDate = maturityDate;
+		Coupon = coupon;
+		FaceValue = faceValue;
+		SecurityStatus = securityStatus;
+		this.trades = trades;
+	}
+
 	public Security(String iSIN, String cUSIP, String issuerName, String securityType, Date maturityDate, int coupon,
-			int faceValue, int securityStatus, Collection<Trade> trades) {
+			int faceValue, int securityStatus) {
 		super();
 		ISIN = iSIN;
 		CUSIP = cUSIP;

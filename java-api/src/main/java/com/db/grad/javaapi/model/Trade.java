@@ -12,7 +12,7 @@ public class Trade {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="TradeId")
 	int TradeId; 
 	private int BookId;
@@ -170,8 +170,7 @@ public class Trade {
 	public String toString() {
 		return "Trade [TradeId=" + TradeId + ", BookId=" + BookId + ", SecurityId=" + SecurityId + ", CounterpartyId="
 				+ CounterpartyId + ", Quantity=" + Quantity + ", Price=" + Price + ", TradeStatus=" + TradeStatus
-				+ ", Buy_Sell=" + Buy_Sell + ", TradeDate=" + TradeDate + ", SettlementDate=" + SettlementDate
-				+ ", books=" + books + ", securities=" + securities + ", Counterparties=" + Counterparties + "]";
+				+ ", Buy_Sell=" + Buy_Sell + ", TradeDate=" + TradeDate + ", SettlementDate=" + SettlementDate+ "]";
 	}
 
 	
