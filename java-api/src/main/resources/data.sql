@@ -173,3 +173,5 @@ insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,B
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values (19, 2, 10, 1, 1, 4704, 0, '2022-08-2', '2022-08-4');
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values (19, 1, 7, 3, 1, 3860, 1, '2022-08-1', '2022-08-3');
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values (5, 1, 10, 1, 1, 4391, 0, '2022-08-8', '2022-08-10');
+
+
