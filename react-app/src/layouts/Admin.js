@@ -6,7 +6,7 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import BookDetail from "views/pages/BookDetail.js"
+import BookDetail from "views/pages/BookDetail.js";
 
 import routes from "routes.js";
 import Profile from "views/pages/Profile";
@@ -48,8 +48,15 @@ const Admin = (props) => {
         return routes[i].name;
       }
     }
-    if(props.location.pathname.indexOf("user-profile") !== -1) {
-      return "User Profile";
+    let brandNames = {
+      "user-profile": "User Profile",
+      book: "Book",
+      trade: "Trades",
+    };
+    for (const [key, value] of Object.entries(brandNames)) {
+      if (props.location.pathname.indexOf(key) !== -1) {
+        return value;
+      }
     }
     return "Brand";
   };
@@ -71,10 +78,13 @@ const Admin = (props) => {
           brandText={getBrandText(props.location.pathname)}
         />
         <Switch>
-          <Route path="/admin/book/:BookId" component={BookDetail}/>
-          <Route path="/admin/user-profile" component={Profile}/>
-          <Route path="/admin/trade/:trade_id" component={TradeDetail}/>
-          <Route path="/admin/security/:security_id" component={SecurityDetail}/>
+          <Route path="/admin/book/:BookId" component={BookDetail} />
+          <Route path="/admin/user-profile" component={Profile} />
+          <Route path="/admin/trade/:TradeId" component={TradeDetail} />
+          <Route
+            path="/admin/security/:SecurityId"
+            component={SecurityDetail}
+          />
           {getRoutes(routes)}
           <Redirect from="*" to="/admin/index" />
         </Switch>

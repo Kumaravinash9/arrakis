@@ -13,9 +13,25 @@ import {
 // core components
 import BlankHeader from "components/Headers/BlankHeader.js";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import BASE_URL from "config.js";
+import axios from "axios";
+
 
 const TradeDetail = () => {
-  const { trade_id } = useParams();
+  const { TradeId } = useParams();
+  const [tradeDetailData, settradeDetailData] = useState([]);
+  const ENDPOINT_URL = `${1}/trades/getTrade/${TradeId}`;
+
+  useEffect(() => {
+    const tradeDetailList = async () => {
+      await axios
+        .get(`${BASE_URL}/${ENDPOINT_URL}`)
+        .then((response) => settradeDetailData(response.data));
+    };
+    tradeDetailList();
+  }, []);
+
   return (
     <>
       <BlankHeader />
@@ -27,7 +43,7 @@ const TradeDetail = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Trade {trade_id}</h3>
+                    <h3 className="mb-0">Trade {TradeId}</h3>
                   </Col>
                 </Row>
               </CardHeader>
@@ -40,16 +56,17 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="tradeID"
+                            htmlFor="TradeID"
                           >
                             ID
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="1"
-                            id="tradeID"
+                            id="TradeID"
                             placeholder="ID"
                             type="number"
+                            value={tradeDetailData.TradeId}
                             readOnly
                           />
                         </FormGroup>
@@ -58,16 +75,17 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="bookID"
+                            htmlFor="BookID"
                           >
                             Book ID
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="1"
-                            id="bookID"
+                            id="BookID"
                             placeholder="Book ID"
                             type="number"
+                            value={tradeDetailData.BookId}
                             readOnly
                           />
                         </FormGroup>
@@ -78,16 +96,17 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="counterpartyID"
+                            htmlFor="CounterpartyID"
                           >
                             Counterparty ID
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="1"
-                            id="counterpartyID"
+                            id="CounterpartyID"
                             placeholder="Counterparty ID"
                             type="number"
+                            value={tradeDetailData.CounterpartyId}
                             readOnly
                           />
                         </FormGroup>
@@ -96,15 +115,16 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="securityID"
+                            htmlFor="SecurityID"
                           >
                             Security ID
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="1"
-                            id="securityID"
+                            id="SecurityID"
                             placeholder="Security ID"
+                            value={tradeDetailData.SecurityId}
                             type="number"
                             readOnly
                           />
@@ -116,15 +136,16 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="quantity"
+                            htmlFor="Quantity"
                           >
                             Quantity
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="1"
-                            id="quantity"
+                            id="Quantity"
                             placeholder="Quantity"
+                            value={tradeDetailData.Quantity}
                             type="number"
                           />
                         </FormGroup>
@@ -133,15 +154,16 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="status"
+                            htmlFor="Status"
                           >
                             Status
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="1"
-                            id="status"
+                            id="Status"
                             placeholder="Status"
+                            value={tradeDetailData.Status ? "Valid" : "Invalid"}
                             type="text"
                             readOnly
                           />
@@ -151,15 +173,16 @@ const TradeDetail = () => {
                     <Row>
                       <Col lg="6">
                         <FormGroup>
-                          <label className="form-control-label" htmlFor="price">
+                          <label className="form-control-label" htmlFor="Price">
                             Price
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="1"
-                            id="price"
+                            id="Price"
                             placeholder="Price"
-                            type="number"
+                            value={"$"+tradeDetailData.Price}
+                            type="text"
                             readOnly
                           />
                         </FormGroup>
@@ -168,15 +191,16 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="buy_sell"
+                            htmlFor="Buy_Sell"
                           >
                             Buy/Sell
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="Buy"
-                            id="buy_sell"
+                            id="Buy_Sell"
                             placeholder="Buy/Sell"
+                            value={tradeDetailData.Buy_Sell ? "Buy" : "Sell"}
                             type="text"
                             readOnly
                           />
@@ -188,15 +212,16 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="tradeDate"
+                            htmlFor="TradeDate"
                           >
                             Trade Date
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="01-01-2000"
-                            id="tradeDate"
+                            id="TradeDate"
                             placeholder="Trade Date"
+                            value={tradeDetailData.TradeDate}
                             type="text"
                             readOnly
                           />
@@ -206,15 +231,16 @@ const TradeDetail = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="setllementDate"
+                            htmlFor="SetllementDate"
                           >
                             Setllement Date
                           </label>
                           <Input
                             className="form-control-alternative"
                             defaultValue="01-01-2000"
-                            id="setllementDate"
+                            id="SetllementDate"
                             placeholder="Setllement Date"
+                            value={tradeDetailData.SettlementDate}
                             type="text"
                             readOnly
                           />

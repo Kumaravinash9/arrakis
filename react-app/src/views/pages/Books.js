@@ -1,4 +1,4 @@
-// Backend URL: /{userId}/books/ 
+// Backend URL: /{userId}/books/
 // Fetches list of all books
 
 import {
@@ -22,15 +22,29 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import DataTable from "react-data-table-component";
-import data from "./sample_data/books.json";
-import React, {useCallback} from 'react';
+import React, { useCallback, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import BASE_URL from "config";
 
 const Books = () => {
   const history = useHistory();
-  const onBookClick = useCallback((book_id) => history.push(`/admin/book/${book_id}`), [history]);
-  // const onBookClick = useCallback((book_id) => navigate(`/admin/book/${book_id}`, {replace: true}), [navigate]);
+  const onBookClick = useCallback(
+    (BookId) => history.push(`/admin/book/${BookId}`),
+    [history]
+  );
+  const [bookData, setBookData] = useState([]);
+  const ENDPOINT_URL = `${1}/books/`;
+  
+  useEffect(() => {
+    const bookList = async () => {
+      await axios.get(`${BASE_URL}/${ENDPOINT_URL}`).then(
+        response => setBookData(response.data)
+      )
+    }
+    bookList();
+  }, []);
+
 
   return (
     <>
@@ -55,38 +69,21 @@ const Books = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((item, i) => {
-                    return <tr
-                      style={{ cursor: "pointer" }}
-                      // onClick={() =>
-                      //   console.log(`Clicked Book ${item.book_id}`)
-                      // }
-                      onClick={() =>
-                        onBookClick(item.book_id)
-                      }
-                      key={item.book_id}
-                    >
-                      <td>{item.book_id}</td>
-                      <td>{item.book_name}</td>
-                    </tr>;
+                  {bookData.map((item, i) => {
+                    return (
+                      <tr
+                        style={{ cursor: "pointer" }}
+                        onClick={() => onBookClick(item.BookId)}
+                        key={item.BookId}
+                      >
+                        <td>{item.BookId}</td>
+                        <td>{item.BookName}</td>
+                      </tr>
+                    );
                   })}
-                  {/* <tr
-                    style={{ cursor: "pointer" }}
-                    onClick={() => console.log("Clicked")}
-                  >
-                    <td>1</td>
-                    <td>Book_1</td>
-                  </tr> */}
                 </tbody>
               </Table>
             </Card>
-
-            {/* <DataTable
-                columns={columns}
-                data={data}
-                className="align-items-center table-dark table-flush"
-                responsive
-              /> */}
           </div>
         </Row>
       </Container>

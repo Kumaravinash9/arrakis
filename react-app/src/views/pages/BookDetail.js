@@ -31,34 +31,54 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import ReactDatetime from "react-datetime";
+import { useParams, useHistory } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import BASE_URL from "config.js";
+import axios from "axios";
 
 const initialFormData = Object.freeze({
   CounterpartyId: 0,
   SecurityId: 0,
   Quantity: 0,
   Price: 0,
-  Buy_Sell: 0
+  Buy_Sell: 0,
 });
 
 const BookDetail = () => {
+
+  const history = useHistory();
+  const onTradeClick = useCallback(
+    (TradeId) => history.push(`/admin/trade/${TradeId}`),
+    [history]
+  );
+
   const { BookId } = useParams();
   const [formModalIsOpen, setFormModalIsOpen] = useState(false);
   const [formData, updateFormData] = useState(initialFormData);
+
+  const [bookDetailData, setBookDetailData] = useState([]);
+  const ENDPOINT_URL = `${1}/trades/${BookId}`;
+
+  useEffect(() => {
+    const bookDetailList = async () => {
+      await axios
+        .get(`${BASE_URL}/${ENDPOINT_URL}`)
+        .then((response) => setBookDetailData(response.data));
+    };
+    bookDetailList();
+  }, []);
 
   const handleChange = (e) => {
     updateFormData({
       ...formData,
 
       // Trimming any whitespace
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log(formData);
     // ... submit to API or something
   };
@@ -71,7 +91,10 @@ const BookDetail = () => {
         {/* Dark table */}
         <Row className="mt-5">
           <div className="col">
-            <Card className="bg-default shadow">
+            <Card
+              className="bg-default shadow"
+              style={{ marginBottom: "25px" }}
+            >
               <CardHeader className="bg-transparent border-0">
                 <Row className="align-items-center">
                   <div className="col">
@@ -99,10 +122,7 @@ const BookDetail = () => {
                             <div className="text-center text-muted mb-4">
                               Enter Trade Details
                             </div>
-                            <Form
-                              role="form"
-                              onSubmit={handleSubmit}
-                            >
+                            <Form role="form" onSubmit={handleSubmit}>
                               <FormGroup className="mb-3">
                                 <InputGroup className="input-group-alternative">
                                   <InputGroupAddon addonType="prepend">
@@ -241,25 +261,34 @@ const BookDetail = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    style={{ cursor: "pointer" }}
-                    onClick={() => console.log("Clicked")}
-                  >
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>
-                      <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-success" />
-                        Valid
-                      </Badge>
-                    </td>
-                    <td>$1000</td>
-                    <td>Buy</td>
-                    <td>01-01-2000</td>
-                    <td>01-01-2000</td>
-                  </tr>
+                  {bookDetailData.map((item, i) => {
+                    return (
+                      <tr
+                        style={{ cursor: "pointer" }}
+                        onClick={() => onTradeClick(item.TradeId)}
+                        key={item.TradeId}
+                      >
+                        <td>{item.TradeId}</td>
+                        <td>{item.CounterpartyId}</td>
+                        <td>{item.SecurityId}</td>
+                        <td>{item.Quantity}</td>
+                        <td>
+                          <Badge color="" className="badge-dot mr-4">
+                            <i
+                              className={
+                                item.TradeStatus ? "bg-success" : "bg-danger"
+                              }
+                            />
+                            {item.TradeStatus ? "Valid" : "Invalid"}
+                          </Badge>
+                        </td>
+                        <td>${item.Price}</td>
+                        <td>{item.Buy_Sell ? "Buy" : "Sell"}</td>
+                        <td>{item.TradeDate}</td>
+                        <td>{item.SettlementDate}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </Table>
             </Card>

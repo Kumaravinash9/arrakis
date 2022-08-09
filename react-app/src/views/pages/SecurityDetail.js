@@ -15,7 +15,7 @@ import BlankHeader from "components/Headers/BlankHeader.js";
 import { useParams } from "react-router-dom";
 
 const SecurityDetail = () => {
-  const { security_id } = useParams();
+  const { SecurityId } = useParams();
   return (
     <>
       <BlankHeader />
@@ -27,7 +27,7 @@ const SecurityDetail = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Security {security_id}</h3>
+                    <h3 className="mb-0">Security {SecurityId}</h3>
                   </Col>
                 </Row>
               </CardHeader>

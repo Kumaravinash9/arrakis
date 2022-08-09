@@ -24,13 +24,13 @@ var routes = [
     component: Securities,
     layout: "/admin",
   },
-  {
-    path: "/trade",
-    name: "Trades",
-    icon: "ni ni-bullet-list-67 text-blue",
-    component: Trades,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/trade",
+  //   name: "Trades",
+  //   icon: "ni ni-bullet-list-67 text-blue",
+  //   component: Trades,
+  //   layout: "/admin",
+  // },
   // {
   //   path: "/hello",
   //   name: "Dashboard Temp",
