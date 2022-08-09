@@ -1,0 +1,18 @@
+[
+    {
+        "book_id": 1,
+        "book_name": "Book 1"
+    },
+    {
+        "book_id": 2,
+        "book_name": "Book 2"
+    },
+    {
+        "book_id": 3,
+        "book_name": "Book 3"
+    },
+    {
+        "book_id": 4,
+        "book_name": "Book 4"
+    }
+]
