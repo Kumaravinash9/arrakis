@@ -4,6 +4,7 @@ package com.db.grad.javaapi.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
 import com.db.grad.javaapi.model.Security;
+import com.db.grad.javaapi.model.SecurityTrade;
 import com.db.grad.javaapi.repository.SecurityRepository;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import javax.validation.Valid;
@@ -37,14 +40,24 @@ public class SecurityController {
 //	    public Optional<Security> findById(@PathVariable final Integer SecurityId) {
 //	        return securityRepository.findById(SecurityId);
 //	    }
-	    
-	    @GetMapping("/{SecurityId}")
-	    public ResponseEntity < Security > getSecurityById(@PathVariable Integer UserId, Integer SecurityId)
-	    	    throws ResourceNotFoundException {
-	    	        Security security = securityRepository.findBySecurityandUser(UserId,SecurityId)
-	    	            .orElseThrow(() -> new ResourceNotFoundException("Security not found for this id :: " + SecurityId));
-	    	        return ResponseEntity.ok().body(security);
-	    	    }
+	    @GetMapping("/{securityId}/trades")
+	    public List<SecurityTrade> getSecurityTrades(@PathVariable("securityId") Integer securityId) {
+	        List<SecurityTrade> tradeSecurity = securityRepository.getTradesOfSecurities(securityId);
+			return tradeSecurity;
+	    }
+	    @GetMapping("/{startDate}/{endDate}")
+	    public List<Security> getSecurityRange(@PathVariable("UserId") Integer userId,@PathVariable("startDate") String startDate, @PathVariable("endDate") String endDate) {
+	        System.out.print(startDate);
+	    	List<Security> securities = securityRepository.getSecurityInRange(userId,startDate,endDate);
+			return securities;
+	    }
+//	    @GetMapping("/{SecurityId}")
+//	    public ResponseEntity < Security > getSecurityById(@PathVariable Integer UserId, Integer SecurityId)
+//	    	    throws ResourceNotFoundException {
+//	    	        Security security = securityRepository.findBySecurityandUser(UserId,SecurityId)
+//	    	            .orElseThrow(() -> new ResourceNotFoundException("Security not found for this id :: " + SecurityId));
+//	    	        return ResponseEntity.ok().body(security);
+//	    	    }
 
 	    @PostMapping("/security")
 	    public Security createDog(@Valid @RequestBody Security secure) {
