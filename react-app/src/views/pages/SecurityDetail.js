@@ -13,9 +13,51 @@ import {
 // core components
 import BlankHeader from "components/Headers/BlankHeader.js";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import BASE_URL from "config.js";
+import axios from "axios";
 
 const SecurityDetail = () => {
   const { SecurityId } = useParams();
+
+  const ENDPOINT_URL = `1/security/getSecurity/${SecurityId}`;
+  const [securityDetailData, setSecurityDetailData] = useState([]);
+  const [securityData, updateSecurityData] = useState({});
+
+  useEffect(() => {
+    const securityDetailList = async () => {
+      await axios.get(`${BASE_URL}/${ENDPOINT_URL}`).then((response) => {
+        setSecurityDetailData(response.data);
+      });
+    };
+    securityDetailList();
+  }, []);
+
+  // const handleChange = (e) => {
+  //   updateSecurityData({
+  //     ...securityData,
+  //     [e.target.name]: parseInt(e.target.value),
+  //   });
+  // };
+
+  const handleSubmit = (e) => {
+    for (let i = 0; i < e.target.length; i++) {
+      if (e.target[i].name == "coupon" || e.target[i].name == "faceValue") {
+        securityData[e.target[i].name] = parseInt(e.target[i].value);
+      }
+    }
+    console.log(securityData);
+    e.preventDefault();
+    let UPDATE_ENDPOINT_URL = `1/security/update/${SecurityId}/`;
+    const updateSecurity = async () => {
+      await axios
+        .put(`${BASE_URL}/${UPDATE_ENDPOINT_URL}`, securityData)
+        .then((response) => window.location.reload(false));
+    };
+    updateSecurity();
+    console.log(securityData);
+  };
+
   return (
     <>
       <BlankHeader />
@@ -32,7 +74,7 @@ const SecurityDetail = () => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                   <h6 className="heading-small text-muted mb-4">Details</h6>
                   <div className="pl-lg-4">
                     <Row>
@@ -46,7 +88,7 @@ const SecurityDetail = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="1"
+                            defaultValue={SecurityId}
                             id="securityID"
                             placeholder="ID"
                             type="number"
@@ -56,15 +98,12 @@ const SecurityDetail = () => {
                       </Col>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="isin"
-                          >
+                          <label className="form-control-label" htmlFor="isin">
                             ISIN
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="IN0000000000"
+                            defaultValue={securityDetailData.isin}
                             id="isin"
                             placeholder="ISIN"
                             type="text"
@@ -74,15 +113,12 @@ const SecurityDetail = () => {
                       </Col>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="cusip"
-                          >
+                          <label className="form-control-label" htmlFor="cusip">
                             CUSIP
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="000000000"
+                            defaultValue={securityDetailData.cusip}
                             id="cusip"
                             placeholder="CUSIP"
                             type="text"
@@ -102,7 +138,7 @@ const SecurityDetail = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="ABC"
+                            defaultValue={securityDetailData.issuerName}
                             id="issuer"
                             placeholder="Issuer"
                             type="text"
@@ -120,7 +156,7 @@ const SecurityDetail = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="01-01-2000"
+                            defaultValue={securityDetailData.maturityDate}
                             id="maturityDate"
                             placeholder="Maturity Date"
                             type="text"
@@ -140,24 +176,23 @@ const SecurityDetail = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="1"
+                            defaultValue={securityDetailData.coupon}
                             id="Coupon"
-                            placeholder="coupon"
+                            name="coupon"
+                            placeholder="Coupon"
                             type="number"
+                            // onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="type"
-                          >
+                          <label className="form-control-label" htmlFor="type">
                             Type
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="1"
+                            defaultValue={securityDetailData.securityType}
                             id="type"
                             placeholder="Type"
                             type="text"
@@ -177,11 +212,12 @@ const SecurityDetail = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="1000"
+                            defaultValue={securityDetailData.faceValue}
                             id="faceValue"
+                            name="faceValue"
                             placeholder="Face Value"
                             type="number"
-                            readOnly
+                            // onChange={handleChange}
                           />
                         </FormGroup>
                       </Col>
@@ -195,7 +231,11 @@ const SecurityDetail = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="1"
+                            value={
+                              securityDetailData.securityStatus == 1
+                                ? "Valid"
+                                : "Invalid"
+                            }
                             id="status"
                             placeholder="Status"
                             type="text"
@@ -206,7 +246,7 @@ const SecurityDetail = () => {
                     </Row>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="default" type="button">
+                    <Button className="my-4" color="default" type="Submit">
                       Update
                     </Button>
                   </div>

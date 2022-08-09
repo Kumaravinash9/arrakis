@@ -17,20 +17,39 @@ import { useState, useEffect } from "react";
 import BASE_URL from "config.js";
 import axios from "axios";
 
-
 const TradeDetail = () => {
   const { TradeId } = useParams();
-  const [tradeDetailData, settradeDetailData] = useState([]);
+  const [tradeDetailData, setTradeDetailData] = useState([]);
   const ENDPOINT_URL = `${1}/trades/getTrade/${TradeId}`;
+  
+  const [tradeData, updateTradeData] = useState({});
 
   useEffect(() => {
     const tradeDetailList = async () => {
       await axios
         .get(`${BASE_URL}/${ENDPOINT_URL}`)
-        .then((response) => settradeDetailData(response.data));
+        .then((response) => setTradeDetailData(response.data));
     };
     tradeDetailList();
   }, []);
+
+  const handleChange = (e) => {
+    updateTradeData({
+      [e.target.name]: parseInt(e.target.value),
+    });
+  };
+
+  const handleSubmit = (e) => {
+    console.log(tradeData);
+    let UPDATE_ENDPOINT_URL = `1/trades/update/${TradeId}/`;
+    const updateTrade = async () => {
+      await axios
+        .put(`${BASE_URL}/${UPDATE_ENDPOINT_URL}`, tradeData)
+        .then((response) => window.location.reload(false));
+    };
+    updateTrade();
+    console.log(tradeData);
+  };
 
   return (
     <>
@@ -48,7 +67,7 @@ const TradeDetail = () => {
                 </Row>
               </CardHeader>
               <CardBody>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                   <h6 className="heading-small text-muted mb-4">Details</h6>
                   <div className="pl-lg-4">
                     <Row>
@@ -142,10 +161,11 @@ const TradeDetail = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="1"
+                            defaultValue={tradeDetailData.Quantity}
                             id="Quantity"
+                            name="quantity"
                             placeholder="Quantity"
-                            value={tradeDetailData.Quantity}
+                            onChange={handleChange}
                             type="number"
                           />
                         </FormGroup>
@@ -249,7 +269,7 @@ const TradeDetail = () => {
                     </Row>
                   </div>
                   <div className="text-center">
-                    <Button className="my-4" color="default" type="button">
+                    <Button className="my-4" color="default" type="submit">
                       Update
                     </Button>
                   </div>

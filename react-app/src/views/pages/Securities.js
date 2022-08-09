@@ -65,19 +65,28 @@ const Securities = () => {
   }, []);
 
   const [formModalIsOpen, setFormModalIsOpen] = useState(false);
-  const [formData, updateFormData] = useState(initialFormData);
+  const [formData, updateFormData] = useState({});
 
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.name == "FaceValue" || e.target.name == "Coupon"
+          ? parseInt(e.target.value)
+          : e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // ... submit to API or something
+    let CREATE_ENDPOINT_URL = "1/security/add"
+    const addSecurity = async () => {
+      await axios
+        .post(`${BASE_URL}/${CREATE_ENDPOINT_URL}`, formData)
+        .then((response) => window.location.reload(false));
+    };
+    addSecurity();
   };
 
   return (
@@ -130,7 +139,7 @@ const Securities = () => {
                                   <Input
                                     placeholder="ISIN"
                                     type="text"
-                                    name="ISIN"
+                                    name="isin"
                                     id="ISIN"
                                     onChange={handleChange}
                                   />
@@ -146,7 +155,7 @@ const Securities = () => {
                                   <Input
                                     placeholder="CUSIP"
                                     type="text"
-                                    name="CUSIP"
+                                    name="cusip"
                                     id="CUSIP"
                                     onChange={handleChange}
                                   />
@@ -160,9 +169,9 @@ const Securities = () => {
                                     </InputGroupText>
                                   </InputGroupAddon>
                                   <Input
-                                    placeholder="IssuerName"
+                                    placeholder="Issuer Name"
                                     type="text"
-                                    name="IssuerName"
+                                    name="issuerName"
                                     id="IssuerName"
                                     onChange={handleChange}
                                   />
@@ -178,7 +187,7 @@ const Securities = () => {
                                   <Input
                                     placeholder="Maturity Date"
                                     type="text"
-                                    name="MaturityDate"
+                                    name="maturityDate"
                                     id="MaturityDate"
                                     onChange={handleChange}
                                   />
@@ -194,7 +203,7 @@ const Securities = () => {
                                   <Input
                                     placeholder="Coupon"
                                     type="number"
-                                    name="Coupon"
+                                    name="coupon"
                                     id="Coupon"
                                     onChange={handleChange}
                                   />
@@ -209,11 +218,11 @@ const Securities = () => {
                                   </InputGroupAddon>
                                   <Input
                                     type="select"
-                                    name="SecurityType"
+                                    name="securityType"
                                     id="SecurityType"
                                     onChange={handleChange}
                                   >
-                                    <option disabled>Select Type</option>
+                                    <option>Select Type</option>
                                     <option>Government</option>
                                     <option>Corporate</option>
                                     <option>Agency</option>
@@ -231,7 +240,7 @@ const Securities = () => {
                                   <Input
                                     placeholder="Face Value"
                                     type="number"
-                                    name="FaceValue"
+                                    name="faceValue"
                                     id="FaceValue"
                                     onChange={handleChange}
                                   />

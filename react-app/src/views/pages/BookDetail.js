@@ -37,11 +37,11 @@ import BASE_URL from "config.js";
 import axios from "axios";
 
 const initialFormData = Object.freeze({
-  CounterpartyId: 0,
-  SecurityId: 0,
-  Quantity: 0,
-  Price: 0,
-  Buy_Sell: 0,
+  counterpartyId: 0,
+  securityId: 0,
+  quantity: 0,
+  price: 0,
+  buy_Sell: 1,
 });
 
 const BookDetail = () => {
@@ -73,14 +73,20 @@ const BookDetail = () => {
       ...formData,
 
       // Trimming any whitespace
-      [e.target.name]: e.target.value,
+      [e.target.name]: parseInt(e.target.value),
     });
   };
 
   const handleSubmit = (e) => {
+    let CREATE_ENDPOINT_URL = `${1}/trades/${BookId}/addtrade`
     e.preventDefault();
     console.log(formData);
-    // ... submit to API or something
+    const addTrade = async () => {
+      await axios
+        .post(`${BASE_URL}/${CREATE_ENDPOINT_URL}`, formData)
+        .then((response) => window.location.reload(false));
+    };
+    addTrade();
   };
 
   return (
@@ -134,7 +140,7 @@ const BookDetail = () => {
                                     placeholder="Counterparty ID"
                                     type="number"
                                     id="CounterpartyId"
-                                    name="CounterpartyId"
+                                    name="counterpartyId"
                                     onChange={handleChange}
                                   />
                                 </InputGroup>
@@ -150,7 +156,7 @@ const BookDetail = () => {
                                     placeholder="Security ID"
                                     type="number"
                                     id="SecurityId"
-                                    name="SecurityId"
+                                    name="securityId"
                                     onChange={handleChange}
                                   />
                                 </InputGroup>
@@ -166,7 +172,7 @@ const BookDetail = () => {
                                     placeholder="Quantity"
                                     type="number"
                                     id="Quantity"
-                                    name="Quantity"
+                                    name="quantity"
                                     onChange={handleChange}
                                   />
                                 </InputGroup>
@@ -182,7 +188,7 @@ const BookDetail = () => {
                                     placeholder="Price"
                                     type="number"
                                     id="Price"
-                                    name="Price"
+                                    name="price"
                                     onChange={handleChange}
                                   />
                                 </InputGroup>
@@ -193,7 +199,7 @@ const BookDetail = () => {
                                     <input
                                       className="custom-control-input"
                                       id="buy_radio"
-                                      name="Buy_Sell"
+                                      name="buy_Sell"
                                       value={1}
                                       type="radio"
                                       onChange={handleChange}
@@ -213,7 +219,7 @@ const BookDetail = () => {
                                       className="custom-control-input"
                                       id="sell_radio"
                                       value={0}
-                                      name="Buy_Sell"
+                                      name="buy_Sell"
                                       onChange={handleChange}
                                       type="radio"
                                     />
