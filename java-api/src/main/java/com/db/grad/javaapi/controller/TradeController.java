@@ -86,11 +86,8 @@ public class TradeController {
   }
 	
 	 //Add new trade
-	@PostMapping("/{bookId}/addtrade")
-    public ResponseEntity<Trade> createTrade(@Valid @RequestBody Trade newtrade,@PathVariable("bookId") Integer bookId) {
-//        return tradeRepository.saveTrade(trades.getCounterpartyId(),trades.getSecurityId(),trades.getQuantity(),trades.getPrice(),trades.getBuy_Sell(),
-//        	bookId);
-        
+	@PostMapping(value="/{bookId}/addtrade",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Trade> createTrade(@RequestBody Trade newtrade,@PathVariable("bookId") Integer bookId) {
 
         newtrade.setBookId(bookId); 
         newtrade.setBuy_Sell(newtrade.getBuy_Sell());

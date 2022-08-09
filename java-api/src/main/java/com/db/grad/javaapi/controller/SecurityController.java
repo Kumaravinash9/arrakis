@@ -89,7 +89,6 @@ public class SecurityController {
 	    	System.out.println(newsecurity);
 	    	
 	    	newsecurity.setISIN(newsecurity.getISIN());
-	    	
 	    	newsecurity.setCUSIP(newsecurity.getCUSIP());
 	    	newsecurity.setIssuerName(newsecurity.getIssuerName());
 	    	newsecurity.setSecurityType(newsecurity.getSecurityType());

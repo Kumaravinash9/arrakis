@@ -1,5 +1,6 @@
 package com.db.grad.javaapi.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,9 +31,10 @@ public class AppController {
 //		this.carService=carService;
 //	}
 	
-@PostMapping("/login")
+	@PostMapping(value="/login",consumes = MediaType.APPLICATION_JSON_VALUE)
  	public String showLoginForm(Model model) {
 
+	System.out.println(model);
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	String encodedPassword = passwordEncoder.encode("12345678"); 
 	System.out.println(encodedPassword);

@@ -62,16 +62,16 @@ insert into counterparty values (13, 'Keith Hendrix');
 insert into counterparty values (14, 'Mary Behnke');
 insert into counterparty values (15, 'Bobbie Cobine');
 
-insert into securities values (1, 'INR15L0J5ZYK', 'W7W24G6UB', 'SBA', '2022-08-25', 9, 'Agency', 1000, 1);
-insert into securities values (2, 'INT8RXH3JWKB', 'Z96MYDSR3', 'TN', '2022-08-5', 5, 'Government', 2000, 0);
-insert into securities values (3, 'INLX7HREZ3MS', '2CZLBK1RM', 'YY', '2022-08-27', 6, 'Municipal', 1000, 1);
-insert into securities values (4, 'INGZZXLPWI5O', 'MEKJMOG15', 'ABC', '2022-08-16', 2, 'Corporate', 5000, 1);
-insert into securities values (5, 'INFADKZW2U0M', 'WP3DP4YLZ', 'ZZ', '2022-08-19', 4, 'Municipal', 5000, 1);
-insert into securities values (6, 'IN18E77MNKD6', 'GHJOOE2SJ', 'XYZ', '2022-08-13', 5, 'Corporate', 4000, 1);
-insert into securities values (7, 'INYWL79CIR87', 'ND2O1PLE7', 'SBA', '2022-08-8', 2, 'Agency', 4000, 0);
-insert into securities values (8, 'IN0X8ZWVDIDG', 'WBX447XZP', 'MH', '2022-08-11', 10, 'Government', 1000, 1);
-insert into securities values (9, 'IN39CVVLUD44', 'WTOW1PUOQ', 'PQR', '2022-08-17', 4, 'Corporate', 4000, 1);
-insert into securities values (10, 'INRN99TSGD7B', 'EJ5MEJJ0U', 'MH', '2022-08-17', 3, 'Government', 5000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('INR15L0J5ZYK', 'W7W24G6UB', 'SBA', '2022-08-25', 9, 'Agency', 1000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('INT8RXH3JWKB', 'Z96MYDSR3', 'TN', '2022-08-5', 5, 'Government', 2000, 0);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('INLX7HREZ3MS', '2CZLBK1RM', 'YY', '2022-08-27', 6, 'Municipal', 1000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('INGZZXLPWI5O', 'MEKJMOG15', 'ABC', '2022-08-16', 2, 'Corporate', 5000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('INFADKZW2U0M', 'WP3DP4YLZ', 'ZZ', '2022-08-19', 4, 'Municipal', 5000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('IN18E77MNKD6', 'GHJOOE2SJ', 'XYZ', '2022-08-13', 5, 'Corporate', 4000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('INYWL79CIR87', 'ND2O1PLE7', 'SBA', '2022-08-8', 2, 'Agency', 4000, 0);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('IN0X8ZWVDIDG', 'WBX447XZP', 'MH', '2022-08-11', 10, 'Government', 1000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('IN39CVVLUD44', 'WTOW1PUOQ', 'PQR', '2022-08-17', 4, 'Corporate', 4000, 1);
+insert into securities (ISIN,CUSIP,IssuerName,MaturityDate,Coupon,SecurityType,FaceValue,SecurityStatus) values ('INRN99TSGD7B', 'EJ5MEJJ0U', 'MH', '2022-08-17', 3, 'Government', 5000, 1);
 
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values (8, 1, 1, 3, 1, 974, 0, '2022-08-6', '2022-08-8');
 insert into trade (BookId,CounterpartyId,SecurityId,Quantity,TradeStatus,Price,Buy_Sell,TradeDate,SettlementDate) values ( 17, 5, 10, 1, 1, 4774, 1, '2022-08-3', '2022-08-5');
