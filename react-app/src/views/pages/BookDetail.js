@@ -1,4 +1,4 @@
-// Backend URL: 
+// Backend URL:
 // Fetches list of all trades of a book
 
 import {
@@ -35,9 +35,34 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import ReactDatetime from "react-datetime";
 
+const initialFormData = Object.freeze({
+  CounterpartyId: 0,
+  SecurityId: 0,
+  Quantity: 0,
+  Price: 0,
+  Buy_Sell: 0
+});
+
 const BookDetail = () => {
-  const { book_id } = useParams();
+  const { BookId } = useParams();
   const [formModalIsOpen, setFormModalIsOpen] = useState(false);
+  const [formData, updateFormData] = useState(initialFormData);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+
+      // Trimming any whitespace
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(formData);
+    // ... submit to API or something
+  };
+
   return (
     <>
       <Header />
@@ -50,9 +75,7 @@ const BookDetail = () => {
               <CardHeader className="bg-transparent border-0">
                 <Row className="align-items-center">
                   <div className="col">
-                    <h3 className="text-white mb-0">
-                      Trades in Book {book_id}
-                    </h3>
+                    <h3 className="text-white mb-0">Trades in Book {BookId}</h3>
                   </div>
                   <div className="col text-right">
                     <Button
@@ -76,7 +99,10 @@ const BookDetail = () => {
                             <div className="text-center text-muted mb-4">
                               Enter Trade Details
                             </div>
-                            <Form role="form">
+                            <Form
+                              role="form"
+                              onSubmit={handleSubmit}
+                            >
                               <FormGroup className="mb-3">
                                 <InputGroup className="input-group-alternative">
                                   <InputGroupAddon addonType="prepend">
@@ -87,6 +113,9 @@ const BookDetail = () => {
                                   <Input
                                     placeholder="Counterparty ID"
                                     type="number"
+                                    id="CounterpartyId"
+                                    name="CounterpartyId"
+                                    onChange={handleChange}
                                   />
                                 </InputGroup>
                               </FormGroup>
@@ -100,6 +129,9 @@ const BookDetail = () => {
                                   <Input
                                     placeholder="Security ID"
                                     type="number"
+                                    id="SecurityId"
+                                    name="SecurityId"
+                                    onChange={handleChange}
                                   />
                                 </InputGroup>
                               </FormGroup>
@@ -110,7 +142,13 @@ const BookDetail = () => {
                                       <i className="ni ni-cart" />
                                     </InputGroupText>
                                   </InputGroupAddon>
-                                  <Input placeholder="Quantity" type="number" />
+                                  <Input
+                                    placeholder="Quantity"
+                                    type="number"
+                                    id="Quantity"
+                                    name="Quantity"
+                                    onChange={handleChange}
+                                  />
                                 </InputGroup>
                               </FormGroup>
                               <FormGroup className="mb-3">
@@ -120,7 +158,13 @@ const BookDetail = () => {
                                       <i className="ni ni-money-coins" />
                                     </InputGroupText>
                                   </InputGroupAddon>
-                                  <Input placeholder="Price" type="number" />
+                                  <Input
+                                    placeholder="Price"
+                                    type="number"
+                                    id="Price"
+                                    name="Price"
+                                    onChange={handleChange}
+                                  />
                                 </InputGroup>
                               </FormGroup>
                               <Row className="align-items-center">
@@ -129,8 +173,10 @@ const BookDetail = () => {
                                     <input
                                       className="custom-control-input"
                                       id="buy_radio"
-                                      name="buy_sell_radio"
+                                      name="Buy_Sell"
+                                      value={1}
                                       type="radio"
+                                      onChange={handleChange}
                                       defaultChecked
                                     />
                                     <label
@@ -146,7 +192,9 @@ const BookDetail = () => {
                                     <input
                                       className="custom-control-input"
                                       id="sell_radio"
-                                      name="buy_sell_radio"
+                                      value={0}
+                                      name="Buy_Sell"
+                                      onChange={handleChange}
                                       type="radio"
                                     />
                                     <label
@@ -162,7 +210,7 @@ const BookDetail = () => {
                                 <Button
                                   className="my-4"
                                   color="default"
-                                  type="button"
+                                  type="submit"
                                 >
                                   Submit
                                 </Button>

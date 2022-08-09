@@ -71,7 +71,7 @@ const Admin = (props) => {
           brandText={getBrandText(props.location.pathname)}
         />
         <Switch>
-          <Route path="/admin/book/:book_id" component={BookDetail}/>
+          <Route path="/admin/book/:BookId" component={BookDetail}/>
           <Route path="/admin/user-profile" component={Profile}/>
           <Route path="/admin/trade/:trade_id" component={TradeDetail}/>
           <Route path="/admin/security/:security_id" component={SecurityDetail}/>
