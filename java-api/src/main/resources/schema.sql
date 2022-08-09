@@ -53,7 +53,7 @@ TradeStatus INT NOT NULL DEFAULT 1,
 Price INT NOT NULL,
 Buy_Sell INT NOT NULL,
 TradeDate DATE,
-SettlementDate DATE NULL,
+SettlementDate DATE,
 FOREIGN KEY (BookId) REFERENCES book(BookId),
 FOREIGN KEY (CounterpartyId) REFERENCES counterparty(CounterpartyId),
 FOREIGN KEY (SecurityId) REFERENCES securities(SecurityId)

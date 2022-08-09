@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,26 +58,31 @@ public class TradeController {
 	      return trade;
 	  }
 	
+	
+	
 	// Update a Trade
-	@PutMapping("update/{tradeId}")
-	public ResponseEntity<Trade> updateTrade(@PathVariable Integer tradeId,@RequestBody Trade tradeDetails) throws ResourceNotFoundException{
-  	//Trade getTrade = getTradeDetails(userId,tradeId);
+	@PutMapping(value="/update/{tradeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateTrade(@RequestBody Trade tradeDetails,@PathVariable Integer tradeId) throws ResourceNotFoundException{
+
+	//Trade newtradeDetails = new Trade(tradeId);
+	
 	Trade getTrade = tradeRepository.findById(tradeId).orElseThrow(() -> new ResourceNotFoundException("Trade not found for id :: " + tradeId));
-	System.out.println(tradeDetails.getTradeId());
-	System.out.println(tradeDetails.toString());
-  	getTrade.setBookId(tradeDetails.getBookId());
-  	getTrade.setSecurityId(tradeDetails.getSecurityId());
-  	getTrade.setCounterpartyId(tradeDetails.getCounterpartyId());
-  	getTrade.setBuy_Sell(tradeDetails.getBuy_Sell());
-  	getTrade.setQuantity(tradeDetails.getQuantity());
-  	getTrade.setPrice(tradeDetails.getPrice());
-  	getTrade.setTradeStatus(tradeDetails.getTradeStatus());
-  	getTrade.setTradeDate(tradeDetails.getTradeDate());
-  	getTrade.setSettlementDate(tradeDetails.getSettlementDate());
+	System.out.println(tradeDetails);
+	//System.out.println(getTrade.toString());
   	
-  
-    final Trade updatedTrade = tradeRepository.save(getTrade);
-    return ResponseEntity.ok(updatedTrade);
+//		getTrade.setBookId(tradeDetails.getBookId());
+//	  	getTrade.setSecurityId(tradeDetails.getSecurityId());
+//	  	getTrade.setCounterpartyId(tradeDetails.getCounterpartyId());
+//	  	getTrade.setBuy_Sell(tradeDetails.getBuy_Sell());
+		getTrade.setQuantity(tradeDetails.getQuantity());
+//	  	getTrade.setPrice(tradeDetails.getPrice());
+//	  	getTrade.setTradeStatus(tradeDetails.getTradeStatus());
+//	  	getTrade.setTradeDate(tradeDetails.getTradeDate());
+//	  	getTrade.setSettlementDate(tradeDetails.getSettlementDate());  	
+//  
+	    final Trade updatedTrade = tradeRepository.save(getTrade);
+	    System.out.println(updatedTrade);
+	    return ResponseEntity.ok("Success");
   }
 	
 	 //Add new trade

@@ -5,6 +5,7 @@ package com.db.grad.javaapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
@@ -49,10 +51,11 @@ public class SecurityController {
 	        return securityRepository.findAllSecurity();
 	    }
 
-//	    @GetMapping("/{SecurityId}")
-//	    public Optional<Security> findById(@PathVariable final Integer SecurityId) {
-//	        return securityRepository.findById(SecurityId);
-//	    }
+	    @RequestMapping(value="getSecurity/{SecurityId}",method=RequestMethod.GET)
+	    public Security findById(@PathVariable final Integer SecurityId) {
+	        return securityRepository.findSecurityById(SecurityId);
+	    }
+	    
 	    @GetMapping("/{securityId}/trades")
 	    public List<SecurityTrade> getSecurityTrades(@PathVariable("securityId") Integer securityId) {
 	        List<SecurityTrade> tradeSecurity = securityRepository.getTradesOfSecurities(securityId);
@@ -74,46 +77,49 @@ public class SecurityController {
 //	    	        return ResponseEntity.ok().body(security);
 //	    	    }
 
-//	    @PostMapping("/add")
-//	    public ResponseEntity<Security> createSecurity(@Valid @RequestBody Security newsecurity)
-//	    {
-////	    	newsecurity.setSecurityId(SecurityId);
-////	    	newsecurity.setISIN("ING67L0U7HKJ");
-//	    	
-//	    	newsecurity.setISIN(newsecurity.getISIN());
-//	    	
-//	    	newsecurity.setCUSIP(newsecurity.getCUSIP());
-//	    	newsecurity.setIssuerName(newsecurity.getIssuerName());
-//	    	newsecurity.setSecurityType(newsecurity.getSecurityType());
-//	    	newsecurity.setMaturityDate(newsecurity.getMaturityDate());
-//	    	newsecurity.setCoupon(newsecurity.getCoupon());
-//	    newsecurity.setFaceValue(newsecurity.getFaceValue());
-//	    	newsecurity.setSecurityStatus(1);
-//	    	System.out.println(newsecurity.getISIN());
-//	    	System.out.println(newsecurity.toString());
-//	    	final Security updatesecurity=securityRepository.save(newsecurity);
-//	    	System.out.println(updatesecurity);
-//	    	return ResponseEntity.ok(updatesecurity);
-//   }
+	    @PostMapping(value="/add",consumes = MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity<String> createSecurity(@RequestBody Security newsecurity)
+	    {
+//	    	newsecurity.setSecurityId(SecurityId);
+//	    	newsecurity.setISIN("ING67L0U7HKJ");
+	    	
+	    	System.out.println(newsecurity);
+	    	
+	    	newsecurity.setISIN(newsecurity.getISIN());
+	    	
+	    	newsecurity.setCUSIP(newsecurity.getCUSIP());
+	    	newsecurity.setIssuerName(newsecurity.getIssuerName());
+	    	newsecurity.setSecurityType(newsecurity.getSecurityType());
+	    	newsecurity.setMaturityDate(newsecurity.getMaturityDate());
+	    	newsecurity.setCoupon(newsecurity.getCoupon());
+	    	newsecurity.setFaceValue(newsecurity.getFaceValue());
+	    	newsecurity.setSecurityStatus(1);
+	    	System.out.println(newsecurity.getISIN());
+	    	System.out.println(newsecurity.toString());
+	    	final Security updatesecurity=securityRepository.save(newsecurity);
+	    	System.out.println(updatesecurity);
+	    	return ResponseEntity.ok("Success");
+   }
 	    
-//	    @PutMapping("/{SecurityId}")
-//	    public ResponseEntity < Security > updateDog(@PathVariable(value = "SecurityId") Integer SecurityId,
-//	        @Valid @RequestBody Security secureDetails) throws ResourceNotFoundException {
-//	    	Security getsecure = securityRepository.findById(SecurityId)
-//	            .orElseThrow(() -> new ResourceNotFoundException("Security not found for this id :: " + SecurityId));
-//
+	    @PutMapping(value="/update/{SecurityId}",consumes = MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseEntity < String > updateSecusrity(@PathVariable(value = "SecurityId") Integer SecurityId,
+	        @RequestBody Security secureDetails) throws ResourceNotFoundException {
+	    	Security getsecure = securityRepository.findById(SecurityId)
+	            .orElseThrow(() -> new ResourceNotFoundException("Security not found for this id :: " + SecurityId));
+
 //	    	getsecure.setISIN(secureDetails.getISIN());
 //	    	getsecure.setCUSIP(secureDetails.getCUSIP());
 //	    	getsecure.setIssuerName(secureDetails.getIssuerName());
 //	    	getsecure.setSecurityType(secureDetails.getSecurityType());
 //	    	getsecure.setMaturityDate(secureDetails.getMaturityDate());
-//	    	getsecure.setCoupon(secureDetails.getCoupon());
-//	    	getsecure.setFaceValue(secureDetails.getFaceValue());
-//	    	getsecure.setSecurityStatus(secureDetails.getSecurityStatus());
-//	    
-//	        final Security updatedSecure = securityRepository.save(getsecure);
-//	        return ResponseEntity.ok(updatedSecure);
-//	    }
+	    	getsecure.setCoupon(secureDetails.getCoupon());
+	    	getsecure.setFaceValue(secureDetails.getFaceValue());
+	    	//getsecure.setSecurityStatus(secureDetails.getSecurityStatus());
+	    
+	        final Security updatedSecure = securityRepository.save(getsecure);
+	        System.out.println(updatedSecure);
+	        return ResponseEntity.ok("Security Updated Successfully!");
+	    }
 	    
 	    
 //	    @DeleteMapping("/delete/{SecurityId}")

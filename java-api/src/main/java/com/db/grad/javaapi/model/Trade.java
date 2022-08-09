@@ -43,6 +43,9 @@ public class Trade {
 	public Trade() {
 		
 	}
+	public Trade(int tradeId) {
+		TradeId = tradeId;
+	}
 
 	public Trade(int bookId, int securityId, int counterpartyId, int quantity, int price, int tradeStatus,
 			int buy_Sell, Date tradeDate, Date settlementDate) {
@@ -62,6 +65,19 @@ public class Trade {
 //		Counterparties = counterparties;
 	}
 
+	public Trade(Integer tradeId, int bookId, int securityId, int counterpartyId, int quantity, int price,
+			int tradeStatus, int buy_Sell, Date tradeDate,Date settlementDate) {
+		TradeId = tradeId;
+		BookId = bookId;
+		SecurityId = securityId;
+		CounterpartyId = counterpartyId;
+		Quantity = quantity;
+		Price = price;
+		TradeStatus = tradeStatus;
+		Buy_Sell = buy_Sell;
+		TradeDate = tradeDate;
+		SettlementDate = settlementDate;
+	}
 	public int getTradeId() {
 		return TradeId;
 	}

@@ -53,6 +53,11 @@ public interface SecurityRepository extends JpaRepository<Security,Integer>{
     +" inner join BookUser u on b.BookId = u.BookId"
 	+" where u.UserId = :UserId and s.SecurityId= :SecurityId")
 	public List<SecurityProjection> findSecurityById(@Param("UserId") Integer UserId, @Param("SecurityId") Integer SecurityId);
+
+
+@Query("SELECT  new com.db.grad.javaapi.model.Security (s.SecurityId,s.ISIN,s.CUSIP,s.IssuerName,s.SecurityType,"
+		+ "s.MaturityDate,s.Coupon,s.FaceValue,s.SecurityStatus) from Security s where s.SecurityId= :securityId ")
+public Security findSecurityById(@Param("securityId") Integer securityId);
 	
 	
 	

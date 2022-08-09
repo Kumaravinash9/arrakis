@@ -24,6 +24,10 @@ public class Security {
 	
 	@OneToMany(mappedBy="securities")
 	private Collection<Trade> trades;
+	
+	public Security() {
+		
+	}
 
 	
 	public Security(int securityId, String iSIN, String cUSIP, String issuerName, String securityType,
