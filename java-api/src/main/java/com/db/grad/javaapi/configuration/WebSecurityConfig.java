@@ -29,14 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	/* @Autowired private DataSource dataSource; */
 	
-	 @Override
-	    protected void configure(HttpSecurity http) throws Exception{
-	        http.cors().and().csrf().disable();
-	        http.authorizeRequests().antMatchers("/dashboard").authenticated()
-			.anyRequest().permitAll() .and() .formLogin() .loginPage("/login")
-			.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
-			.and().logout().logoutSuccessUrl("/logout").permitAll();
-	    }
+//	 @Override
+//	    protected void configure(HttpSecurity http) throws Exception{
+//	        http.cors().and().csrf().disable();
+//	        http.authorizeRequests().antMatchers("/dashboard").authenticated()
+//			.anyRequest().permitAll() .and() .formLogin() .loginPage("/login")
+//			.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
+//			.and().logout().logoutSuccessUrl("/logout").permitAll();
+//	    }
 
 	    @Bean
 	    CorsConfigurationSource corsConfigurationSource() {
@@ -79,15 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	
 	}
-<<<<<<< HEAD
-	
-//	@Override protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("/dashboard").authenticated()
-//			.anyRequest().permitAll() .and() .formLogin() .loginPage("/login")
-//			.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
-//			.and().logout().logoutSuccessUrl("/logout").permitAll();
-//	} 
-=======
+
 	@Override
     protected void configure(HttpSecurity http) throws Exception{
 		 http.authorizeRequests()
@@ -101,6 +93,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
 		.and().logout().logoutSuccessUrl("/logout").permitAll();
     }
->>>>>>> 4af7f9a07a65abd8b96d62316177f6ed0bf70cbb
-	
+
 }

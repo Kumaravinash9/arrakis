@@ -7,6 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.db.grad.javaapi.model.User;
 
 @Controller
 public class AppController {
@@ -27,7 +30,7 @@ public class AppController {
 //		this.carService=carService;
 //	}
 	
-@GetMapping("/login")
+@PostMapping("/login")
  	public String showLoginForm(Model model) {
 
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
