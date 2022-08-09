@@ -20,7 +20,7 @@ import axios from "axios";
 const TradeDetail = () => {
   const { TradeId } = useParams();
   const [tradeDetailData, setTradeDetailData] = useState([]);
-  const ENDPOINT_URL = `${1}/trades/getTrade/${TradeId}`;
+  const ENDPOINT_URL = `${localStorage.getItem("userId")}/trades/getTrade/${TradeId}`;
   
   const [tradeData, updateTradeData] = useState({});
 

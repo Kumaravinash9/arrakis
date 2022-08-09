@@ -34,7 +34,7 @@ const Books = () => {
     [history]
   );
   const [bookData, setBookData] = useState([]);
-  const ENDPOINT_URL = `${1}/books/`;
+  const ENDPOINT_URL = `${localStorage.getItem("userId")}/books/`;
   
   useEffect(() => {
     const bookList = async () => {

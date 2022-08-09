@@ -35,13 +35,16 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
+  const handleLogout = (e) => {
+    localStorage.clear();
+    props.history.push("/auth/login");
+  };
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
         <Container fluid>
-          <h4
-            className="mb-0 text-white text-uppercase d-none d-lg-inline-block"
-          >
+          <h4 className="mb-0 text-white text-uppercase d-none d-lg-inline-block">
             {props.brandText}
           </h4>
           {/* <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
@@ -61,11 +64,11 @@ const AdminNavbar = (props) => {
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">
                   <span>
-                  <i className="ni ni-bold-down" />
+                    <i className="ni ni-bold-down" />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-md font-weight-bold">
-                      Jessica Jones
+                      {localStorage.getItem("name")}
                     </span>
                   </Media>
                 </Media>
@@ -79,7 +82,7 @@ const AdminNavbar = (props) => {
                   <span>My profile</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem onClick={handleLogout}>
                   <i className="ni ni-button-power" />
                   <span>Logout</span>
                 </DropdownItem>

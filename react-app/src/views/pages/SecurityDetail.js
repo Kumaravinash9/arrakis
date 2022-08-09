@@ -36,9 +36,9 @@ const SecurityDetail = () => {
   }, []);
 
   const handleSubmit = (e) => {
-    for (let i = 0; i < e.target.length; i++) {
-      if (e.target[i].name == "coupon" || e.target[i].name == "faceValue") {
-        securityData[e.target[i].name] = parseInt(e.target[i].value);
+    for (const element of e.target) {
+      if (element.name == "coupon" || element.name == "faceValue") {
+        securityData[element.name] = parseInt(element.value);
       }
     }
     console.log(securityData);
@@ -54,7 +54,7 @@ const SecurityDetail = () => {
   };
 
   const [tradesData, setTradesData] = useState([]);
-  const TRADE_ENDPOINT_URL = `${1}/security/${SecurityId}/trades`;
+  const TRADE_ENDPOINT_URL = `${localStorage.getItem("userId")}/security/${SecurityId}/trades`;
 
   useEffect(() => {
     const tradesList = async () => {

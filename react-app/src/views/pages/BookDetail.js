@@ -57,7 +57,7 @@ const BookDetail = () => {
   const [formData, updateFormData] = useState(initialFormData);
 
   const [bookDetailData, setBookDetailData] = useState([]);
-  const ENDPOINT_URL = `${1}/trades/${BookId}`;
+  const ENDPOINT_URL = `${localStorage.getItem("userId")}/trades/${BookId}`;
 
   useEffect(() => {
     const bookDetailList = async () => {
@@ -78,7 +78,7 @@ const BookDetail = () => {
   };
 
   const handleSubmit = (e) => {
-    let CREATE_ENDPOINT_URL = `${1}/trades/${BookId}/addtrade`
+    let CREATE_ENDPOINT_URL = `${localStorage.getItem("userId")}/trades/${BookId}/addtrade`
     e.preventDefault();
     console.log(formData);
     const addTrade = async () => {

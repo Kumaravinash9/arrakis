@@ -46,7 +46,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="1"
+                            defaultValue={localStorage.getItem("userId")}
                             id="input-ID"
                             placeholder="ID"
                             type="number"
@@ -64,7 +64,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Jessica Jones"
+                            defaultValue={localStorage.getItem("name")}
                             id="input-name"
                             placeholder="Name"
                             type="text"
@@ -85,8 +85,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="input-email"
-                            placeholder="a@db.com"
-                            defaultValue="db@db.com"
+                            defaultValue={localStorage.getItem("email")}
                             type="email"
                             readOnly
                           />
@@ -102,7 +101,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Supervisor"
+                            defaultValue={localStorage.getItem("role")}
                             id="input-role"
                             placeholder="Role"
                             type="text"

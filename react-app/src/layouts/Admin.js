@@ -18,6 +18,10 @@ const Admin = (props) => {
   const location = useLocation();
 
   React.useEffect(() => {
+    const token = localStorage.getItem("userId");
+    if (!token) {
+      props.history.push("/auth/login");
+    }
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
@@ -40,12 +44,11 @@ const Admin = (props) => {
   };
 
   const getBrandText = (path) => {
-    for (let i = 0; i < routes.length; i++) {
+    for (const element of routes) {
       if (
-        props.location.pathname.indexOf(routes[i].layout + routes[i].path) !==
-        -1
+        props.location.pathname.indexOf(element.layout + element.path) !== -1
       ) {
-        return routes[i].name;
+        return element.name;
       }
     }
     let brandNames = {
@@ -66,11 +69,11 @@ const Admin = (props) => {
       <Sidebar
         {...props}
         routes={routes}
-        logo={{
-          innerLink: "/admin/index",
-          imgSrc: require("../assets/img/brand/argon-react.png").default,
-          imgAlt: "...",
-        }}
+        // logo={{
+        //   innerLink: "/admin/index",
+        //   imgSrc: require("../assets/img/brand/argon-react.png").default,
+        //   imgAlt: "...",
+        // }}
       />
       <div className="main-content" ref={mainContent}>
         <AdminNavbar
