@@ -1,3 +1,6 @@
+// Backend URL: /{userId}/books/ 
+// Fetches list of all books
+
 import {
   Badge,
   Card,
@@ -61,6 +64,7 @@ const Books = () => {
                       onClick={() =>
                         onBookClick(item.book_id)
                       }
+                      key={item.book_id}
                     >
                       <td>{item.book_id}</td>
                       <td>{item.book_name}</td>

@@ -10,6 +10,8 @@ import BookDetail from "views/pages/BookDetail.js"
 
 import routes from "routes.js";
 import Profile from "views/pages/Profile";
+import TradeDetail from "views/pages/TradeDetail";
+import SecurityDetail from "views/pages/SecurityDetail";
 
 const Admin = (props) => {
   const mainContent = React.useRef(null);
@@ -69,9 +71,11 @@ const Admin = (props) => {
           brandText={getBrandText(props.location.pathname)}
         />
         <Switch>
-          {getRoutes(routes)}
           <Route path="/admin/book/:book_id" component={BookDetail}/>
           <Route path="/admin/user-profile" component={Profile}/>
+          <Route path="/admin/trade/:trade_id" component={TradeDetail}/>
+          <Route path="/admin/security/:security_id" component={SecurityDetail}/>
+          {getRoutes(routes)}
           <Redirect from="*" to="/admin/index" />
         </Switch>
       </div>

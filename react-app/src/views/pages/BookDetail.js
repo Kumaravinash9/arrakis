@@ -1,3 +1,6 @@
+// Backend URL: 
+// Fetches list of all trades of a book
+
 import {
   Badge,
   Button,
