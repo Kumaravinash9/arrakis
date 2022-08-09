@@ -79,6 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	
 	}
+<<<<<<< HEAD
 	
 //	@Override protected void configure(HttpSecurity http) throws Exception {
 //		http.authorizeRequests().antMatchers("/dashboard").authenticated()
@@ -86,5 +87,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //			.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
 //			.and().logout().logoutSuccessUrl("/logout").permitAll();
 //	} 
+=======
+	@Override
+    protected void configure(HttpSecurity http) throws Exception{
+		 http.authorizeRequests()
+         .antMatchers("/").permitAll()
+         .antMatchers("/h2-console/**").permitAll();
+		
+		 http.csrf().disable();
+		 http.headers().frameOptions().disable();
+		http.authorizeRequests().antMatchers("/dashboard").authenticated()
+		.anyRequest().permitAll() .and() .formLogin() .loginPage("/login")
+		.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
+		.and().logout().logoutSuccessUrl("/logout").permitAll();
+    }
+>>>>>>> 4af7f9a07a65abd8b96d62316177f6ed0bf70cbb
 	
 }

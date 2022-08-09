@@ -29,9 +29,11 @@ public class AppController {
 	
 @GetMapping("/login")
  	public String showLoginForm(Model model) {
+
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//	String encodedPassword = passwordEncoder.encode("12345678"); 
-//	System.out.println(encodedPassword);
+	String encodedPassword = passwordEncoder.encode("12345678"); 
+	System.out.println(encodedPassword);
+
 	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 	    return "login1";
