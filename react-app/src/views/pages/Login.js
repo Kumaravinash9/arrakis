@@ -31,7 +31,7 @@ const Login = () => {
           if (response.status == 200) {
             localStorage.setItem("userId", response.data["userId"]);
             localStorage.setItem("name", response.data["name"]);
-            localStorage.setItem("email", response.data["userId"]);
+            localStorage.setItem("email", response.data["email"]);
             localStorage.setItem("role", response.data["role"]);
             window.location.reload(false);
           }
