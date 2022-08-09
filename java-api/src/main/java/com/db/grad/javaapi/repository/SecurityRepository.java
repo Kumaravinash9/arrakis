@@ -35,4 +35,36 @@ public interface SecurityRepository extends JpaRepository<Security,Integer>{
 			+ "AND t.SecurityId=s.SecurityId AND"
 			+ " b.UserId= :userId")
 	public List<Security> getSecurityInRange(@Param("userId") Integer userId);
+	
+	
+	
+	
+	@Query("SELECT new com.db.grad.javaapi.model.Security(s.SecurityId,s.ISIN,s.CUSIP,s.IssuerName,s.SecurityType,"
+			+"s.MaturityDate,s.Coupon,s.FaceValue,s.SecurityStatus) from Security s")
+	public List<Security> findAllSecurity();
+	
+	
+	
+	
+@Query("SELECT new com.db.grad.javaapi.repository.SecurityProjection (u.UserId, s.ISIN, s.CUSIP, t.BookId,"
+	+" s.IssuerName, s.SecurityType, s.MaturityDate, s.Coupon, s.FaceValue, s.SecurityStatus)"
+    +" from Security s inner join Trade t on s.SecurityId = t.SecurityId"
+	+" inner join Book b on t.BookId = b.BookId"
+    +" inner join BookUser u on b.BookId = u.BookId"
+	+" where u.UserId = :UserId and s.SecurityId= :SecurityId")
+	public List<SecurityProjection> findSecurityById(@Param("UserId") Integer UserId, @Param("SecurityId") Integer SecurityId);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
