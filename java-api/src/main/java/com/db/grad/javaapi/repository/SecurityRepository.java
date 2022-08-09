@@ -27,12 +27,12 @@ public interface SecurityRepository extends JpaRepository<Security,Integer>{
 			+ "where s.SecurityId= :securityId")
 	public List<SecurityTrade> getTradesOfSecurities(@Param("securityId") Integer securityId);
 	
+
+
 	@Query("SELECT new com.db.grad.javaapi.model.Security(s.SecurityId,s.ISIN,s.CUSIP,s.IssuerName,s.SecurityType, "
 			+ "s.MaturityDate,s.Coupon,s.FaceValue,s.SecurityStatus) from "
 			+ "BookUser b , Trade t,Security s WHERE b.BookId=t.BookId "
 			+ "AND t.SecurityId=s.SecurityId AND"
-			+ " b.UserId= :userId AND s.MaturityDate BETWEEN :startDate AND :endDate")
-	public List<Security> getSecurityInRange(@Param("userId") Integer userId,@Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
-//	public String getCarsByRegisterDate ( @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
-//			 @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate, Model model)
+			+ " b.UserId= :userId")
+	public List<Security> getSecurityInRange(@Param("userId") Integer userId);
 }

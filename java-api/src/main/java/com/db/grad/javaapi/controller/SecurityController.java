@@ -19,8 +19,11 @@ import com.db.grad.javaapi.model.Security;
 import com.db.grad.javaapi.model.SecurityTrade;
 import com.db.grad.javaapi.repository.SecurityRepository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -46,9 +49,11 @@ public class SecurityController {
 			return tradeSecurity;
 	    }
 	    @GetMapping("/{startDate}/{endDate}")
-	    public List<Security> getSecurityRange(@PathVariable("UserId") Integer userId,@PathVariable("startDate") String startDate, @PathVariable("endDate") String endDate) {
-	        System.out.print(startDate);
-	    	List<Security> securities = securityRepository.getSecurityInRange(userId,startDate,endDate);
+	    public List<Security> getSecurityRange(@PathVariable("UserId") Integer userId,@PathVariable("startDate") String startDate, @PathVariable("endDate") String endDate) throws ParseException {
+	        Date sd=new SimpleDateFormat("yyyy-mm-dd").parse(startDate);
+	        Date ed=new SimpleDateFormat("yyyy-mm-dd").parse(endDate);
+	    	List<Security> securities = securityRepository.getSecurityInRange(userId).stream()
+	    			.filter(p->p.getMaturityDate().getTime()>sd.getTime()).filter(p->p.getMaturityDate().getTime()<=ed.getTime()).collect(Collectors.toList());
 			return securities;
 	    }
 //	    @GetMapping("/{SecurityId}")
