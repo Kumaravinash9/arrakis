@@ -183,7 +183,7 @@ const TradeDetail = () => {
                             defaultValue="1"
                             id="Status"
                             placeholder="Status"
-                            value={tradeDetailData.Status ? "Valid" : "Invalid"}
+                            value={tradeDetailData.TradeStatus ? "Valid" : "Invalid"}
                             type="text"
                             readOnly
                           />

@@ -9,11 +9,13 @@ import {
   Container,
   Row,
   Col,
+  Table,
+  Badge,
 } from "reactstrap";
 // core components
 import BlankHeader from "components/Headers/BlankHeader.js";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
 import BASE_URL from "config.js";
 import axios from "axios";
 
@@ -33,13 +35,6 @@ const SecurityDetail = () => {
     securityDetailList();
   }, []);
 
-  // const handleChange = (e) => {
-  //   updateSecurityData({
-  //     ...securityData,
-  //     [e.target.name]: parseInt(e.target.value),
-  //   });
-  // };
-
   const handleSubmit = (e) => {
     for (let i = 0; i < e.target.length; i++) {
       if (e.target[i].name == "coupon" || e.target[i].name == "faceValue") {
@@ -57,6 +52,25 @@ const SecurityDetail = () => {
     updateSecurity();
     console.log(securityData);
   };
+
+  const [tradesData, setTradesData] = useState([]);
+  const TRADE_ENDPOINT_URL = `${1}/security/${SecurityId}/trades`;
+
+  useEffect(() => {
+    const tradesList = async () => {
+      await axios.get(`${BASE_URL}/${TRADE_ENDPOINT_URL}`).then((response) => {
+        setTradesData(response.data);
+        console.log(response.data);
+      });
+    };
+    tradesList();
+  }, []);
+
+  const history = useHistory();
+  const onTradeClick = useCallback(
+    (TradeId) => history.push(`/admin/trade/${TradeId}`),
+    [history]
+  );
 
   return (
     <>
@@ -252,6 +266,74 @@ const SecurityDetail = () => {
                   </div>
                 </Form>
               </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="order-xl-1">
+            <Card
+              className="bg-default shadow"
+              style={{ marginBottom: "25px" }}
+            >
+              <CardHeader className="bg-transparent border-0">
+                <Row className="align-items-center">
+                  <div className="col">
+                    <h3 className="text-white mb-0">
+                      Trades in Security {SecurityId}
+                    </h3>
+                  </div>
+                </Row>
+              </CardHeader>
+              <Table
+                className="align-items-center table-dark table-flush"
+                responsive
+              >
+                <thead className="thead-dark">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Book ID</th>
+                    <th scope="col">Counterparty ID</th>
+                    <th scope="col">Security ID</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Buy/Sell</th>
+                    <th scope="col">Trade Date</th>
+                    <th scope="col">Settlement Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tradesData.map((item, i) => {
+                    return (
+                      <tr
+                        style={{ cursor: "pointer" }}
+                        onClick={() => onTradeClick(item.tradeId)}
+                        key={item.tradeId}
+                      >
+                        <td>{item.tradeId}</td>
+                        <td>{item.bookId}</td>
+                        <td>{item.counterpartyId}</td>
+                        <td>{item.securityId}</td>
+                        <td>{item.quantity}</td>
+                        <td>
+                          <Badge color="" className="badge-dot mr-4">
+                            <i
+                              className={
+                                item.tradeStatus ? "bg-success" : "bg-danger"
+                              }
+                            />
+                            {item.tradeStatus ? "Valid" : "Invalid"}
+                          </Badge>
+                        </td>
+                        <td>${item.price}</td>
+                        <td>{item.buy_Sell ? "Buy" : "Sell"}</td>
+                        <td>{item.tradeDate}</td>
+                        <td>{item.settlementDate}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
             </Card>
           </Col>
         </Row>
