@@ -53,12 +53,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	
 	}
-	
-	@Override protected void configure(HttpSecurity http) throws Exception {
+	@Override
+    protected void configure(HttpSecurity http) throws Exception{
+		 http.authorizeRequests()
+         .antMatchers("/").permitAll()
+         .antMatchers("/h2-console/**").permitAll();
+		
+		 http.csrf().disable();
+		 http.headers().frameOptions().disable();
 		http.authorizeRequests().antMatchers("/dashboard").authenticated()
-			.anyRequest().permitAll() .and() .formLogin() .loginPage("/login")
-			.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
-			.and().logout().logoutSuccessUrl("/logout").permitAll();
-	} 
+		.anyRequest().permitAll() .and() .formLogin() .loginPage("/login")
+		.usernameParameter("email") .defaultSuccessUrl("/dashboard") .permitAll()
+		.and().logout().logoutSuccessUrl("/logout").permitAll();
+    }
 	
 }

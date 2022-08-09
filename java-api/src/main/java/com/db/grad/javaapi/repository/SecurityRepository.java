@@ -18,14 +18,16 @@ import com.db.grad.javaapi.model.SecurityTrade;
 @Repository
 public interface SecurityRepository extends JpaRepository<Security,Integer>{
 	@Query("SELECT new com.db.grad.javaapi.model.SecurityTrade("
-			+ "s.SecurityId,s.ISIN,s.CUSIP,s.IssuerName,s.SecurityType,"
-			+ "s.MaturityDate,s.Coupon,s.FaceValue,s.SecurityStatus,t.TradeId,"
-			+ "t.BookId,t.CounterpartyId,t.Quantity,t.Price,t.TradeStatus,"
-			+ "t.Buy_Sell,t.TradeDate,t.SettlementDate) "
-			+ "FROM Security s inner join Trade t "
-			+ "ON s.SecurityId=t.SecurityId "
-			+ "where s.SecurityId= :securityId")
-	public List<SecurityTrade> getTradesOfSecurities(@Param("securityId") Integer securityId);
+			+ " s.SecurityId,s.ISIN,s.CUSIP,s.IssuerName,s.SecurityType,"
+			+ "	s.MaturityDate,s.Coupon,s.FaceValue,s.SecurityStatus,t.TradeId,"
+			+ "	t.BookId,t.CounterpartyId,t.Quantity,t.Price,t.TradeStatus,"
+			+ "	t.Buy_Sell,t.TradeDate,t.SettlementDate)"
+			+ "	FROM BookUser b,Trade t, Security s"
+			+ "	Where b.BookId=t.BookId"
+			+ "	AND t.SecurityId=s.SecurityId"
+			+ "	AND t.SecurityId=:securityId"
+			+ "	AND b.UserId=:userId")
+	public List<SecurityTrade> getTradesOfSecurities(@Param("userId") Integer userId,@Param("securityId") Integer securityId);
 	
 
 

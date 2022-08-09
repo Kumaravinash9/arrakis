@@ -54,14 +54,17 @@ public class SecurityController {
 //	        return securityRepository.findById(SecurityId);
 //	    }
 	    @GetMapping("/{securityId}/trades")
-	    public List<SecurityTrade> getSecurityTrades(@PathVariable("securityId") Integer securityId) {
-	        List<SecurityTrade> tradeSecurity = securityRepository.getTradesOfSecurities(securityId);
+	    public List<SecurityTrade> getSecurityTrades(@PathVariable("UserId") Integer userId,@PathVariable("securityId") Integer securityId) {
+	        List<SecurityTrade> tradeSecurity = securityRepository.getTradesOfSecurities(userId,securityId);
 			return tradeSecurity;
 	    }
 	    @GetMapping("/{startDate}/{endDate}")
 	    public List<Security> getSecurityRange(@PathVariable("UserId") Integer userId,@PathVariable("startDate") String startDate, @PathVariable("endDate") String endDate) throws ParseException {
 	        Date sd=new SimpleDateFormat("yyyy-mm-dd").parse(startDate);
 	        Date ed=new SimpleDateFormat("yyyy-mm-dd").parse(endDate);
+	        System.out.println(sd);
+	        System.out.println(ed);
+	        System.out.println(securityRepository.getSecurityInRange(userId));
 	    	List<Security> securities = securityRepository.getSecurityInRange(userId).stream()
 	    			.filter(p->p.getMaturityDate().getTime()>sd.getTime()).filter(p->p.getMaturityDate().getTime()<=ed.getTime()).collect(Collectors.toList());
 			return securities;
